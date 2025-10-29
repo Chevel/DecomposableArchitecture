@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import ComposableArchitecture
 
 @main
 struct DecomposableArchitectureApp: App {
@@ -25,7 +26,7 @@ struct DecomposableArchitectureApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView(store: Store(initialState: RootViewFeature.State(title: "asd")) { RootViewFeature() })
         }
         .modelContainer(sharedModelContainer)
     }
