@@ -9,16 +9,34 @@ import SwiftUI
 import ComposableArchitecture
 
 extension Onboarding {
-
+    
     struct WelcomeView: View {
-      let store: StoreOf<WelcomeViewFeature>
+        
+        @Bindable var store: StoreOf<WelcomeViewFeature>
+        
+        var body: some View {
+            NavigationStack(path: $store.scope(state: \.path, action: \.path)) {
+                // Root view of the navigation stack
+                content
+            } destination: { store in
+                // A view for each case of the Path.State enum
+                switch store.case {
+                case .step1(let store): Onboarding.Step1View(store: store)
+                case .step2(let store): Onboarding.Step2View(store: store)
+                }
+            }
+        }
+    }
+}
 
-      var body: some View {
-          VStack {
-              Spacer()
-              Text(store.title)
-              Spacer()
-          }
-      }
+private extension Onboarding.WelcomeView {
+    
+    var content: some View {
+        VStack {
+            Spacer()
+            Text(store.title)
+            Button("NEXT") { store.send(.nextPressed) }
+            Spacer()
+        }
     }
 }

@@ -20,6 +20,7 @@ extension Onboarding {
                     return .none
                 }
             }
+            ._printChanges()
         }
     }
 }
@@ -29,7 +30,7 @@ extension Onboarding {
 extension Onboarding.Step2ViewFeature {
     
     @ObservableState
-    struct State: Equatable {
+    struct State {
         var title: String = "step 2"
     }
 }

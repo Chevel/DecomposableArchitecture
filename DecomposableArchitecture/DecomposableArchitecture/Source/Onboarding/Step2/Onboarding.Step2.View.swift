@@ -17,6 +17,7 @@ extension Onboarding {
           VStack {
               Spacer()
               Text(store.title)
+              Button("NEXT") { store.send(.nextPressed) }
               Spacer()
           }
       }
