@@ -18,12 +18,7 @@ struct RootView: View {
             content
 
         case .onboarding:
-            Onboarding.WelcomeView(
-                store: Store(
-                    initialState: Onboarding.WelcomeViewFeature.State(),
-                    reducer: { Onboarding.WelcomeViewFeature() }
-                )
-            )
+            Onboarding.WelcomeView(store: store.scope(state: \.onboarding, action: \.onboarding))
         }
     }
 }
