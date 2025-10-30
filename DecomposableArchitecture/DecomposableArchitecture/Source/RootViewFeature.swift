@@ -11,15 +11,17 @@ import ComposableArchitecture
 struct RootViewFeature {
 
     var body: some Reducer<State, Action> {
+        Scope(state: \.onboarding, action: \.onboarding) {
+            Onboarding.WelcomeViewFeature()
+        }
         Reduce { state, action in
             switch action {
             case .startOnboardingButtonTapped:
                 state.appState = .onboarding
-                state.onboarding = Onboarding.WelcomeViewFeature.State()
 
             case .onboarding(.onboardingFinished):
                 state.appState = .main
-                state.onboarding = nil
+                state.onboarding = Onboarding.WelcomeViewFeature.State()
                 
             default:
                 return .none
@@ -27,9 +29,6 @@ struct RootViewFeature {
             return .none
         }
         ._printChanges()
-        .ifLet(\.onboarding, action: \.onboarding) {
-            Onboarding.WelcomeViewFeature()
-        }
     }
 }
 
@@ -40,9 +39,11 @@ extension RootViewFeature {
     @ObservableState
     struct State {
         var title: String
-        var onboarding: Onboarding.WelcomeViewFeature.State?
 
+        var onboarding = Onboarding.WelcomeViewFeature.State()
         var appState: AppState = .main
+        
+        @Reducer
         enum AppState {
             case main
             case onboarding
