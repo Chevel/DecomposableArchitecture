@@ -4,4 +4,8 @@
 <h3>About</h3>
 <body>
   A minimal viable project to explore this composable reducers and protocols.
+  <br /><br />
+  Further discussion regarding the architecture is available here:
+  <br />
+  https://medium.com/@matej-kokosinek/decomposable-architecture-tca-985f912ec256
 </body>
